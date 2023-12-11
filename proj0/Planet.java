@@ -93,5 +93,11 @@ public class Planet {
 
     }
 
+    /** Draw a planet at its appropriate position. */
+    public void draw(){
+        StdDraw.picture(this.xxPos, this.yyPos, "./images/" + this.imgFileName);
+        StdDraw.show();
+    }
+
 }
 
