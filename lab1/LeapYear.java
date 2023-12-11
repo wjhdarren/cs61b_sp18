@@ -1,3 +1,5 @@
+package cs61b_sp18.lab1;
+
 /** Class that determines whether or not a year is a leap year.
  *  @author YOUR NAME HERE
  */
