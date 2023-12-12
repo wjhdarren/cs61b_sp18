@@ -1,9 +1,9 @@
 public class NBody {
 
-    public static String background = ("./images/starfield.jpg");
+    private static String background = ("./images/starfield.jpg");
 
     /** Read radius of the universe from a .txt file. */
-    public static double readRadius(String file){
+    private static double readRadius(String file){
         In input = new In(file);
         int firstItem = input.readInt();
         double secondItem = input.readDouble();
@@ -11,7 +11,7 @@ public class NBody {
     }
 
     /** Give an array of planets corresponding to the planets in the file. */
-    public static Planet[] readPlanets(String file){
+    private static Planet[] readPlanets(String file){
         In input = new In(file);
         int num_planets = input.readInt();
         double secondItem = input.readDouble();
@@ -28,14 +28,14 @@ public class NBody {
         return planets;  
     }
 
-    public static void drawBackground(double radius){
+    private static void drawBackground(double radius){
         StdDraw.setScale(-radius, radius);
 		StdDraw.clear();
 		StdDraw.picture(0, 0, background);
 		//StdDraw.show();
     }
 
-    public static void drawPlanet(Planet[] planets){
+    private static void drawPlanet(Planet[] planets){
         for (int i = 0; i < planets.length; i++){
             planets[i].draw();
         }
@@ -50,6 +50,7 @@ public class NBody {
         Planet[] planets = readPlanets(filename);
 
         /** Creat an animation. */
+        StdAudio.play("./audio/2001.mid");  //Play the theme to 2001: A Space Odyssey!!!!
         StdDraw.enableDoubleBuffering(); //Prevent flickering in the animation.
         drawBackground(radius);
         drawPlanet(planets);
@@ -69,7 +70,7 @@ public class NBody {
             drawBackground(radius);
             drawPlanet(planets);
             StdDraw.show();
-            StdDraw.pause(20);
+            StdDraw.pause(10);
         }
 
         StdOut.printf("%d\n", planets.length);

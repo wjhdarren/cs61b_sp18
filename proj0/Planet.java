@@ -3,7 +3,7 @@ public class Planet {
 
     /** Declare constants*/
 
-    public static final double G = 6.67e-11; //Gravity constant
+    private static final double G = 6.67e-11; //Gravity constant
 
     /** Instance variables */
     public double xxPos;
