@@ -1,9 +1,7 @@
 public class NBody {
 
-    private static String background = ("./images/starfield.jpg");
-
     /** Read radius of the universe from a .txt file. */
-    private static double readRadius(String file){
+    public static double readRadius(String file){
         In input = new In(file);
         int firstItem = input.readInt();
         double secondItem = input.readDouble();
@@ -11,7 +9,7 @@ public class NBody {
     }
 
     /** Give an array of planets corresponding to the planets in the file. */
-    private static Planet[] readPlanets(String file){
+    public static Planet[] readPlanets(String file){
         In input = new In(file);
         int num_planets = input.readInt();
         double secondItem = input.readDouble();
@@ -28,19 +26,6 @@ public class NBody {
         return planets;  
     }
 
-    private static void drawBackground(double radius){
-        StdDraw.setScale(-radius, radius);
-		StdDraw.clear();
-		StdDraw.picture(0, 0, background);
-		//StdDraw.show();
-    }
-
-    private static void drawPlanet(Planet[] planets){
-        for (int i = 0; i < planets.length; i++){
-            planets[i].draw();
-        }
-    }
-
     public static void main(String[] args){
         /** Collect all needed input. */
         double T = Double.parseDouble(args[0]);
@@ -48,15 +33,22 @@ public class NBody {
         String filename = args[2];
         double radius = readRadius(filename);
         Planet[] planets = readPlanets(filename);
+        String background = ("./images/starfield.jpg");
 
         /** Creat an animation. */
         StdAudio.play("./audio/2001.mid");  //Play the theme to 2001: A Space Odyssey!!!!
         StdDraw.enableDoubleBuffering(); //Prevent flickering in the animation.
-        drawBackground(radius);
-        drawPlanet(planets);
+        //Draw background.
+        StdDraw.setScale(-radius, radius);
+		StdDraw.clear();
+		StdDraw.picture(0, 0, background);
+        //Draw planets.
+        for (int i = 0; i < planets.length; i++){
+            planets[i].draw();
+        }
         StdDraw.show();
     
-        for (double t = 0; t<=T; t= t + dt){
+        for (double t = 0; t < T; t= t + dt){
             double[] xForces = new double[planets.length];
             double[] yForces = new double[planets.length];
             for (int i = 0; i < planets.length; i++){ //loop on each planet.
@@ -67,8 +59,13 @@ public class NBody {
             for (int i = 0; i < planets.length; i++){ 
                 planets[i].update(dt, xForces[i], yForces[i]);
             }
-            drawBackground(radius);
-            drawPlanet(planets);
+            //Draw background.
+            StdDraw.setScale(-radius, radius);
+		    StdDraw.picture(0, 0, background);
+            //Draw planets.
+            for (int i = 0; i < planets.length; i++){
+                planets[i].draw();
+            }
             StdDraw.show();
             StdDraw.pause(10);
         }
