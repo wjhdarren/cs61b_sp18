@@ -60,7 +60,7 @@ public class Planet {
      * net X and net Y force exerted by all planets in that array upon the current Planet.*/
     public double calcNetForceExertedByX(Planet[] planets){
         double netforce = 0;
-        for (int i=0; i < planets.length; i++){
+        for (int i = 0; i < planets.length; i++){
             if (planets[i]==this){
                 continue;
             }
@@ -71,8 +71,8 @@ public class Planet {
 
     public double calcNetForceExertedByY(Planet[] planets){
         double netforce = 0;
-        for (int i=0; i < planets.length; i++){
-            if (planets[i]==this){
+        for (int i = 0; i < planets.length; i++){
+            if (planets[i] == this){
                 continue;
             }
             netforce += this.calcForceExertedByY(planets[i]);
