@@ -39,7 +39,7 @@ public class LinkedListDeque<T>{
 
     /** Return true if deque is empty, false otherwise */
     public boolean isEmpty(){
-        return sentinel.next == null;
+        return sentinel.next == sentinel;
     }
 
     /** Return the number of items in the deque */
@@ -59,7 +59,7 @@ public class LinkedListDeque<T>{
 
     /** Removes and returns the item at the front of the deque. If no such item exists, returns null.*/
     public T removeFirst(){
-        if(sentinel.next == null){
+        if(sentinel.next == sentinel){
             return null;
         }
         ItemNode p = sentinel.next;
@@ -71,7 +71,7 @@ public class LinkedListDeque<T>{
 
     /** Removes and returns the item at the back of the deque. If no such item exists, returns null.*/
     public T removeLast(){
-        if(sentinel.next == null){
+        if(sentinel.next == sentinel){
             return null;
         }
         ItemNode p = sentinel.prev;
