@@ -2,14 +2,16 @@ public class ArrayDequeTest {
 
     public static void testArray(){
         ArrayDeque<Integer> test = new ArrayDeque<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000000; i++) {
             test.addFirst(i);
+            test.addLast(i);
         }
-        System.out.println(test.get(2));
-        test.printDeque();
+        System.out.println(test.get(0));
+
         test.removeFirst();
         test.removeLast();
-        test.printDeque();
+        System.out.println(test.get(0));
+
     }
 
 

@@ -9,7 +9,7 @@ public class ArrayDeque<T> {
 
     /** Resize items with capability length. */
     @SuppressWarnings("unchecked")
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         T[] tmp = (T[]) new Object[capacity];
         int oldSize = size;
 
