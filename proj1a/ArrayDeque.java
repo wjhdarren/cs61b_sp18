@@ -6,7 +6,7 @@ public class ArrayDeque<T> {
 
 
     /** Resize items with capability length.
-     public void resize(int capability){
+     public void resize(int capability) {
      T[] tmp = new T[capability];
      System.arraycopy(items, 0, tmp, 0, size);
      items = tmp;
@@ -32,7 +32,6 @@ public class ArrayDeque<T> {
     public void addLast(T item) {
         items[rear] = item;
         rear = (rear + 1) % items.length;
-
     }
 
     /**
@@ -50,16 +49,17 @@ public class ArrayDeque<T> {
     }
 
    /** Prints the items in the deque from first to last, separated by a space.*/
-    public void printDeque(){
-        for (int i = 0; i< this.size(); i++){
+    public void printDeque() {
+        for (int i = 0; i< this.size(); i++) {
             System.out.print(items[(front + i) % items.length] + " ");
         }
         System.out.println();
     }
 
-    /** Removes and returns the item at the front of the deque. If no such item exists, returns null.*/
-    public T removeFirst(){
-        if (front == rear){
+    /** Removes and returns the item at the front of the deque.
+     * If no such item exists, returns null.*/
+    public T removeFirst() {
+        if (front == rear) {
             return null;
         }
         T firstitem = items[front];
@@ -67,9 +67,10 @@ public class ArrayDeque<T> {
         return firstitem;
     }
 
-    /** Removes and returns the item at the back of the deque. If no such item exists, returns null. */
-    public T removeLast(){
-        if (front == rear){
+    /** Removes and returns the item at the back of the deque.
+     * If no such item exists, returns null. */
+    public T removeLast() {
+        if (front == rear) {
             return null;
         }
         rear = (rear - 1 + items.length) % items.length;
@@ -78,8 +79,8 @@ public class ArrayDeque<T> {
 
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque! */
-    public T get(int index){
-        if (index < 0 || index >= size()){
+    public T get(int index) {
+        if (index < 0 || index >= size()) {
             return null;
         }
         return items[(front + index + items.length) % items.length];
