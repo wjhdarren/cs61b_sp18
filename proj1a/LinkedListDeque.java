@@ -84,7 +84,7 @@ public class LinkedListDeque<T>{
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque! */
     public T get(int index){
-        if (index >= size){
+        if (index < 0 || index >= size){
             return null;
         }
         ItemNode p = sentinel.next;
@@ -95,7 +95,7 @@ public class LinkedListDeque<T>{
         }
     /** Same as get, but uses recursion. */
     public T getRecursive(int index){
-        if (index >= size){
+        if ( index < 0 || index >= size){
             return null;
         } else if (index == 0){
             return sentinel.next.item;
