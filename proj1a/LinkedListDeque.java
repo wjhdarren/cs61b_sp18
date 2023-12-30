@@ -67,6 +67,9 @@ public class LinkedListDeque<T> {
         sentinel.next = p.next;
         p.next.prev = sentinel;
         size --;
+        if (isEmpty()) {
+            sentinel.next = sentinel;
+        }
         return p.item;
     }
 
@@ -77,9 +80,12 @@ public class LinkedListDeque<T> {
             return null;
         }
         ItemNode p = sentinel.prev;
-        sentinel.next = p.prev;
+        sentinel.prev = p.prev;
         p.prev.next = sentinel;
         size --;
+        if (isEmpty()) {
+            sentinel.next = sentinel;
+        }
         return p.item;
     }
 
@@ -96,13 +102,17 @@ public class LinkedListDeque<T> {
         return p.item;
         }
     /** Same as get, but uses recursion. */
+    private T getRecursiveHelper(ItemNode node, int index) {
+        if (index == 0) {
+            return node.item;
+        } else {
+            return getRecursiveHelper(node.next, index - 1);
+        }
+    }
     public T getRecursive(int index) {
         if (index < 0 || index >= size) {
             return null;
-        } else if (index == 0) {
-            return sentinel.next.item;
-        } else {
-            return getRecursive(index - 1);
         }
+        return getRecursiveHelper(sentinel.next, index);
     }
 }
