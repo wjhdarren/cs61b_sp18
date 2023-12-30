@@ -3,14 +3,16 @@ public class ArrayDeque<T> {
 
     private int front = 0; //position of the first element in the deque
     private int rear = 0; //position of the last element in the deque + 1
+    private static final int RFACTOR = 2;
 
 
-    /** Resize items with capability length.
-     public void resize(int capability) {
-     T[] tmp = new T[capability];
-     System.arraycopy(items, 0, tmp, 0, size);
-     items = tmp;
-     } */
+    /** Resize items with capability length. */
+     @SuppressWarnings("unchecked")
+     public void resize(int capacity) {
+         T[] tmp = (T[]) new Object[capacity];
+         System.arraycopy(items, 0, tmp, 0, size);
+         items = tmp;
+     }
 
     /** Create an empty array deque */
     @SuppressWarnings("unchecked")
@@ -22,6 +24,9 @@ public class ArrayDeque<T> {
      * Adds an item of type T to the front of the deque.
      */
     public void addFirst(T item) {
+        if (size() == items.length){
+            resize(size() * RFACTOR);
+        }
         front = (front - 1 + items.length) % items.length;
         items[front] = item;
     }
@@ -30,6 +35,9 @@ public class ArrayDeque<T> {
      * Adds an item of type T to the back of the deque.
      */
     public void addLast(T item) {
+        if (size() == items.length){
+            resize(size() * RFACTOR);
+        }
         items[rear] = item;
         rear = (rear + 1) % items.length;
     }

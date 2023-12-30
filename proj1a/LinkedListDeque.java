@@ -1,5 +1,5 @@
 public class LinkedListDeque<T> {
-    private final ItemNode sentinel;
+    private ItemNode sentinel;
     private int size;
    
     private class ItemNode {
