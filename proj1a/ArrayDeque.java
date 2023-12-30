@@ -7,12 +7,12 @@ public class ArrayDeque<T> {
 
 
     /** Resize items with capability length. */
-     @SuppressWarnings("unchecked")
-     public void resize(int capacity) {
-         T[] tmp = (T[]) new Object[capacity];
-         System.arraycopy(items, 0, tmp, 0, size);
-         items = tmp;
-     }
+    @SuppressWarnings("unchecked")
+    public void resize(int capacity) {
+        T[] tmp = (T[]) new Object[capacity];
+        System.arraycopy(items, 0, tmp, 0, size());
+        items = tmp;
+    }
 
     /** Create an empty array deque */
     @SuppressWarnings("unchecked")
@@ -24,7 +24,7 @@ public class ArrayDeque<T> {
      * Adds an item of type T to the front of the deque.
      */
     public void addFirst(T item) {
-        if (size() == items.length){
+        if (size() == items.length) {
             resize(size() * RFACTOR);
         }
         front = (front - 1 + items.length) % items.length;
@@ -35,7 +35,7 @@ public class ArrayDeque<T> {
      * Adds an item of type T to the back of the deque.
      */
     public void addLast(T item) {
-        if (size() == items.length){
+        if (size() == items.length) {
             resize(size() * RFACTOR);
         }
         items[rear] = item;
@@ -58,7 +58,7 @@ public class ArrayDeque<T> {
 
    /** Prints the items in the deque from first to last, separated by a space.*/
     public void printDeque() {
-        for (int i = 0; i< this.size(); i++) {
+        for (int i = 0; i < this.size(); i++) {
             System.out.print(items[(front + i) % items.length] + " ");
         }
         System.out.println();

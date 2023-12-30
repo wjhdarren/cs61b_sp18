@@ -1,15 +1,15 @@
 public class LinkedListDeque<T> {
     private ItemNode sentinel;
     private int size;
-   
+
     private class ItemNode {
         public ItemNode prev;
         public T item;
         public ItemNode next; 
         public ItemNode(T something, ItemNode p, ItemNode n) {
-            prev = p;
-            item = something;
-            next = n;
+            this.prev = p;
+            this.item = something;
+            this.next = n;
         }
     }
     /** Create an empty deque */
@@ -26,7 +26,7 @@ public class LinkedListDeque<T> {
         ItemNode newNode = new ItemNode(item, sentinel, sentinel.next);
         sentinel.next.prev = newNode;
         sentinel.next = newNode;
-        size ++;
+        size++;
     }
 
     /** Add an item to the back of the deque */
@@ -34,7 +34,7 @@ public class LinkedListDeque<T> {
         ItemNode newNode = new ItemNode(item, sentinel.prev, sentinel);
         sentinel.prev.next = newNode;
         sentinel.prev = newNode;
-        size ++;
+        size++;
     }
 
     /** Return true if deque is empty, false otherwise */
@@ -66,7 +66,7 @@ public class LinkedListDeque<T> {
         ItemNode p = sentinel.next;
         sentinel.next = p.next;
         p.next.prev = sentinel;
-        size --;
+        size--;
         if (isEmpty()) {
             sentinel.next = sentinel;
         }
@@ -82,7 +82,7 @@ public class LinkedListDeque<T> {
         ItemNode p = sentinel.prev;
         sentinel.prev = p.prev;
         p.prev.next = sentinel;
-        size --;
+        size--;
         if (isEmpty()) {
             sentinel.next = sentinel;
         }
@@ -98,9 +98,9 @@ public class LinkedListDeque<T> {
         ItemNode p = sentinel.next;
         for (int i = 0; i < index; i++) {
             p = p.next;
-            }
-        return p.item;
         }
+        return p.item;
+    }
     /** Same as get, but uses recursion. */
     private T getRecursiveHelper(ItemNode node, int index) {
         if (index == 0) {
@@ -115,4 +115,5 @@ public class LinkedListDeque<T> {
         }
         return getRecursiveHelper(sentinel.next, index);
     }
+
 }
