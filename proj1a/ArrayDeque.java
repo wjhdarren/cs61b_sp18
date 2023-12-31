@@ -21,6 +21,20 @@ public class ArrayDeque<T> {
         rear = oldSize - 1;
     }
 
+    /** Check and resize down after removals. */
+    private void downsize() {
+        double ratio = (double) size / items.length;
+        if (ratio < 0.25 && size > 0) {
+            T[] tmp = (T[]) new Object[(int) (0.5 * items.length)];
+            for (int i = 0; i < size; i++) {
+                tmp[i] = get(i);
+            }
+            items = tmp;
+            front = 0;
+            rear = size - 1; //can size = 0 here?
+        }
+    }
+
     /** Create an empty array deque */
     @SuppressWarnings("unchecked")
     public ArrayDeque() {
@@ -85,18 +99,23 @@ public class ArrayDeque<T> {
 
     /** Removes and returns the item at the front of the deque.
      * If no such item exists, returns null.*/
+
     public T removeFirst() {
         if (isEmpty()) {
             return null;
-        } else if (size == 1) {
-            size--;
-            return items[front];
-        } else {
-            T firstItem = items[front];
-            front = (front + 1) % items.length;
-            size--;
-            return  firstItem;
         }
+
+        T firstItem = items[front];
+        items[front] = null; // Help with garbage collection
+        front = (front + 1) % items.length;
+        size--;
+
+        if (isEmpty()) {
+            front = 0;
+            rear = 0;
+        }
+        downsize();
+        return firstItem;
     }
 
     /** Removes and returns the item at the back of the deque.
@@ -104,15 +123,19 @@ public class ArrayDeque<T> {
     public T removeLast() {
         if (isEmpty()) {
             return null;
-        } else if (size == 1) {
-            size--;
-            return items[rear];
-        } else {
-            T lastItem = items[rear];
-            rear = (rear - 1 + items.length) % items.length;
-            size--;
-            return lastItem;
         }
+
+        T lastItem = items[rear];
+        items[rear] = null;
+        rear = (rear - 1 + items.length) % items.length;
+        size--;
+
+        if (isEmpty()) {
+            front = 0;
+            rear = 0;
+        }
+        downsize();
+        return lastItem;
     }
 
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
